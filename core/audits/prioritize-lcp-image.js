@@ -69,7 +69,7 @@ class PrioritizeLcpImage extends Audit {
   static findLCPNode(graph, lcpRecord) {
     for (const {node} of graph.traverseGenerator()) {
       if (node.type !== 'network') continue;
-      if (node.record.requestId === lcpRecord.requestId) {
+      if (node.request.requestId === lcpRecord.requestId) {
         return node;
       }
     }
@@ -222,7 +222,7 @@ class PrioritizeLcpImage extends Audit {
       wastedMs,
       results: [{
         node: Audit.makeNodeItem(lcpElement.node),
-        url: lcpNode.record.url,
+        url: lcpNode.request.url,
         wastedMs,
       }],
     };

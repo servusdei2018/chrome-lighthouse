@@ -18,13 +18,13 @@
     "message": "A(z) `[aria-*]` attribútumok megfelelnek szerepüknek"
   },
   "core/audits/accessibility/aria-allowed-role.js | description": {
-    "message": "Az ARIA `role` elemek lehetővé teszik a segítő technológiák számára, hogy megismerjék a weboldalon található egyes elemek szerepét. Ha a(z) `role` értékeket hibásan írja be, nem létező ARIA `role` értékeket vagy absztrakt szerepköröket használ, akkor a rendszer nem közli az elem célját a segítő technológiák felhasználóival. [További információ az ARIA-szerepkörökről](https://dequeuniversity.com/rules/axe/4.9/aria-allowed-role)."
+    "message": "Many HTML elements can only be assigned certain ARIA roles. Using ARIA roles where they are not allowed can interfere with the accessibility of the web page. [Learn more about ARIA roles](https://dequeuniversity.com/rules/axe/4.9/aria-allowed-role)."
   },
   "core/audits/accessibility/aria-allowed-role.js | failureTitle": {
-    "message": "A(z) `role=\"\"` elemhez rendelt értékek nem érvényes ARIA-szerepek."
+    "message": "Uses ARIA roles on incompatible elements"
   },
   "core/audits/accessibility/aria-allowed-role.js | title": {
-    "message": "A(z) `role=\"\"` elemhez hozzárendelt értékek érvényes ARIA-szerepek."
+    "message": "Uses ARIA roles only on compatible elements"
   },
   "core/audits/accessibility/aria-command-name.js | description": {
     "message": "Ha valamelyik elem nem rendelkezik kisegítő névvel, a képernyőolvasók általános néven olvassák fel, ami használhatatlan a képernyőolvasóra hagyatkozó felhasználók számára. [További információ a parancselemek hozzáférhetőbbé tételéről](https://dequeuniversity.com/rules/axe/4.9/aria-command-name)."
@@ -34,6 +34,24 @@
   },
   "core/audits/accessibility/aria-command-name.js | title": {
     "message": "A(z) `button`, `link` és `menuitem` elemek akadálymentes névvel rendelkeznek"
+  },
+  "core/audits/accessibility/aria-conditional-attr.js | description": {
+    "message": "Egyes ARIA-attribútumok csak bizonyos feltételek teljesülése esetén engedélyezettek egy elemen. [További információ a feltételes ARIA-attribútumokról](https://dequeuniversity.com/rules/axe/4.9/aria-conditional-attr)."
+  },
+  "core/audits/accessibility/aria-conditional-attr.js | failureTitle": {
+    "message": "Az ARIA-attribútumok használata nem az elem szerepe szerint történik"
+  },
+  "core/audits/accessibility/aria-conditional-attr.js | title": {
+    "message": "Az ARIA-attribútumok használata az elem szerepe szerint történik"
+  },
+  "core/audits/accessibility/aria-deprecated-role.js | description": {
+    "message": "Előfordulhat, hogy az elavult ARIA-szerepeket a segítő technológia nem tudja helyesen feldolgozni. [További információ az elavult ARIA-szerepekről](https://dequeuniversity.com/rules/axe/4.9/aria-deprecated-role)."
+  },
+  "core/audits/accessibility/aria-deprecated-role.js | failureTitle": {
+    "message": "Elavult ARIA-szerepek voltak használatban"
+  },
+  "core/audits/accessibility/aria-deprecated-role.js | title": {
+    "message": "Nem voltak használatban elavult ARIA-szerepek"
   },
   "core/audits/accessibility/aria-dialog-name.js | description": {
     "message": "A kisegítő nevekkel nem rendelkező ARIA-párbeszédelemek megakadályozhatják, hogy a képernyőolvasót használók felismerjék ezeknek az elemeknek a célját. [További információ az ARIA-párbeszédelemek hozzáférhetőbbé tételéről](https://dequeuniversity.com/rules/axe/4.9/aria-dialog-name)."
@@ -88,6 +106,15 @@
   },
   "core/audits/accessibility/aria-progressbar-name.js | title": {
     "message": "A(z) `progressbar` ARIA-elemek akadálymentes névvel rendelkeznek"
+  },
+  "core/audits/accessibility/aria-prohibited-attr.js | description": {
+    "message": "Az ARIA-attribútumok használata olyan szerepekben, ahol tiltottak, azzal járhat, hogy a rendszer nem ad át fontos információkat a segítő technológiák felhasználóinak. [További információ a tiltott ARIA-szerepekről](https://dequeuniversity.com/rules/axe/4.9/aria-prohibited-attr)."
+  },
+  "core/audits/accessibility/aria-prohibited-attr.js | failureTitle": {
+    "message": "Elemek tiltott ARIA-attribútumokat használnak"
+  },
+  "core/audits/accessibility/aria-prohibited-attr.js | title": {
+    "message": "Az elemek csak engedélyezett ARIA-attribútumokat használnak"
   },
   "core/audits/accessibility/aria-required-attr.js | description": {
     "message": "Bizonyos ARIA-szerepkörök kötelező attribútumokkal rendelkeznek, amelyek az elem állapotát írják le a képernyőolvasók számára. [További információ a szerepkörökről és a kötelező attribútumokról](https://dequeuniversity.com/rules/axe/4.9/aria-required-attr)."
@@ -1174,6 +1201,15 @@
   },
   "core/audits/prioritize-lcp-image.js | title": {
     "message": "A legnagyobb vizuális tartalomválasz képének előtöltése"
+  },
+  "core/audits/redirects-http.js | description": {
+    "message": "Gondoskodjon a teljes HTTP-forgalom HTTPS-re történő átirányításáról, hogy a biztonságos webes funkciók az összes felhasználó számára rendelkezésre álljanak. [További információ](https://developer.chrome.com/docs/lighthouse/pwa/redirects-http/)."
+  },
+  "core/audits/redirects-http.js | failureTitle": {
+    "message": "Nem irányítja át a HTTP-forgalmat HTTPS-re"
+  },
+  "core/audits/redirects-http.js | title": {
+    "message": "Átirányítja a HTTP-forgalmat HTTPS-re"
   },
   "core/audits/redirects.js | description": {
     "message": "Az átirányítások további késlekedéssel hosszabbítják meg az oldalbetöltéshez szükséges időt. [További információ az oldalátirányítások elkerüléséről](https://developer.chrome.com/docs/lighthouse/performance/redirects/)."
@@ -2432,6 +2468,9 @@
   "core/lib/lh-error.js | requestContentTimeout": {
     "message": "A tartalom lekérése túllépte a megengedett időt"
   },
+  "core/lib/lh-error.js | targetCrashed": {
+    "message": "A böngészőlap váratlanul összeomlott."
+  },
   "core/lib/lh-error.js | urlInvalid": {
     "message": "Úgy tűnik, a megadott URL érvénytelen."
   },
@@ -2620,9 +2659,6 @@
   },
   "node_modules/lighthouse-stack-packs/packs/drupal.js | efficient-animated-content": {
     "message": "Fontolja meg a GIF-fájlok olyan szolgáltatóhoz való feltöltését, amely lehetővé teszi a fájlok HTML5-videóként történő beágyazását."
-  },
-  "node_modules/lighthouse-stack-packs/packs/drupal.js | font-display": {
-    "message": "Adja meg a `@font-display` leírót, amikor témájához egyéni betűtípusokat határoz meg."
   },
   "node_modules/lighthouse-stack-packs/packs/drupal.js | modern-image-formats": {
     "message": "Vegye fontolóra a [WebP képformátumok konvertált képstílussal](https://www.drupal.org/docs/core-modules-and-themes/core-modules/image-module/working-with-images#styles) való konfigurálását a webhelyen."
@@ -2857,9 +2893,6 @@
   },
   "node_modules/lighthouse-stack-packs/packs/nitropack.js | render-blocking-resources": {
     "message": "A gyorsabb kezdeti betöltési idők érdekében engedélyezze a(z) [`Remove render-blocking resources`](https://support.nitropack.io/hc/en-us/articles/13820893500049-How-to-Deal-with-Render-Blocking-Resources-in-NitroPack) attribútumot a NitroPackben."
-  },
-  "node_modules/lighthouse-stack-packs/packs/nitropack.js | server-response-time": {
-    "message": "A(z) [`Instant Load`](https://support.nitropack.io/hc/en-us/articles/16547340617361) aktiválásával javíthat a szerver válaszidején, és optimalizálhatja az észlelt teljesítményt."
   },
   "node_modules/lighthouse-stack-packs/packs/nitropack.js | unminified-css": {
     "message": "Ha engedélyezi a(z) [`Minify resources`](https://support.nitropack.io/hc/en-us/articles/360061059394-Minify-Resources) funkciót a gyorsítótárazási beállításokban, azzal csökkentheti a CSS-, HTML- és JavaScript-fájlok méretét a betöltési idő lerövidítése érdekében."

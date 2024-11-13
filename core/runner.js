@@ -9,7 +9,7 @@ import path from 'path';
 
 
 import log from 'lighthouse-logger';
-import isDeepEqual from 'lodash/isEqual.js';
+import {isEqual} from 'lodash-es';
 
 import {ReportScoring} from './scoring.js';
 import {Audit} from './audits/audit.js';
@@ -308,7 +308,7 @@ class Runner {
         ...Object.keys(normalizedAuditSettings),
       ]);
       for (const k of keys) {
-        if (!isDeepEqual(normalizedGatherSettings[k], normalizedAuditSettings[k])) {
+        if (!isEqual(normalizedGatherSettings[k], normalizedAuditSettings[k])) {
           throw new Error(
             `Cannot change settings between gathering and auditing…
 Difference found at: \`${k}\`
@@ -318,8 +318,8 @@ vs
         }
       }
 
-      // Call `isDeepEqual` on the entire thing, just in case something was missed.
-      if (!isDeepEqual(normalizedGatherSettings, normalizedAuditSettings)) {
+      // Call `isEqual` on the entire thing, just in case something was missed.
+      if (!isEqual(normalizedGatherSettings, normalizedAuditSettings)) {
         throw new Error('Cannot change settings between gathering and auditing');
       }
     }
@@ -387,7 +387,6 @@ vs
         // If artifact was an error, output error result on behalf of audit.
         if (artifacts[artifactName] instanceof Error) {
           /** @type {Error} */
-          // @ts-expect-error: TODO why is this a type error now?
           const artifactError = artifacts[artifactName];
 
           log.warn('Runner', `${artifactName} gatherer, required by audit ${audit.meta.id},` +

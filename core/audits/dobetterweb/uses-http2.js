@@ -9,9 +9,6 @@
  * origin are over the http/2 protocol.
  */
 
-/** @typedef {import('../../lib/lantern/simulator/simulator.js').Simulator} Simulator */
-/** @typedef {import('../../lib/lantern/base-node.js').Node<LH.Artifacts.NetworkRequest>} Node */
-
 import {Audit} from '../audit.js';
 import {EntityClassification} from '../../computed/entity-classification.js';
 import UrlUtils from '../../lib/url-utils.js';
@@ -69,8 +66,8 @@ class UsesHTTP2Audit extends Audit {
    * Computes the estimated effect of all results being converted to http/2 on the provided graph.
    *
    * @param {Array<{url: string}>} results
-   * @param {Node} graph
-   * @param {Simulator} simulator
+   * @param {LH.Gatherer.Simulation.GraphNode} graph
+   * @param {LH.Gatherer.Simulation.Simulator} simulator
    * @param {{label?: string}=} options
    * @return {{savings: number, simulationBefore: LH.Gatherer.Simulation.Result, simulationAfter: LH.Gatherer.Simulation.Result}}
    */
@@ -87,9 +84,9 @@ class UsesHTTP2Audit extends Audit {
     const originalProtocols = new Map();
     graph.traverse(node => {
       if (node.type !== 'network') return;
-      if (!urlsToChange.has(node.record.url)) return;
+      if (!urlsToChange.has(node.request.url)) return;
 
-      originalProtocols.set(node.record.requestId, node.record.protocol);
+      originalProtocols.set(node.request.requestId, node.request.protocol);
       node.request.protocol = 'h2';
     });
 
@@ -98,7 +95,7 @@ class UsesHTTP2Audit extends Audit {
     // Restore the original protocol after we've done our simulation
     graph.traverse(node => {
       if (node.type !== 'network') return;
-      const originalProtocol = originalProtocols.get(node.record.requestId);
+      const originalProtocol = originalProtocols.get(node.request.requestId);
       if (originalProtocol === undefined) return;
       node.request.protocol = originalProtocol;
     });

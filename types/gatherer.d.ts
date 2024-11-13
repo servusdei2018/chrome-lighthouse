@@ -17,7 +17,7 @@ import Config from './config.js';
 import Result from './lhr/lhr.js';
 import Protocol from './protocol.js';
 import Puppeteer from './puppeteer.js';
-import * as Lantern from '../core/lib/lantern/types/lantern.js';
+import * as Lantern from '../core/lib/lantern/lantern.js';
 
 type CrdpEvents = CrdpMappings.Events;
 type CrdpCommands = CrdpMappings.Commands;
@@ -35,6 +35,7 @@ declare module Gatherer {
     sendCommand<TMethod extends keyof CrdpCommands>(method: TMethod, ...params: CrdpCommands[TMethod]['paramsType']): Promise<CrdpCommands[TMethod]['returnType']>;
     sendCommandAndIgnore<TMethod extends keyof CrdpCommands>(method: TMethod, ...params: CrdpCommands[TMethod]['paramsType']): Promise<void>;
     dispose(): Promise<void>;
+    onCrashPromise(): Promise<never>;
   }
 
   interface Driver {
@@ -49,8 +50,6 @@ declare module Gatherer {
       off(event: 'protocolevent', callback: (payload: Protocol.RawEventMessage) => void): void
     };
     networkMonitor: NetworkMonitor;
-    listenForCrashes: (() => void);
-    fatalRejection: {promise: Promise<never>, rej: (reason: Error) => void}
   }
 
   interface Context<TDependencies extends DependencyKey = DefaultDependenciesKey> {
@@ -134,12 +133,11 @@ declare module Gatherer {
   type AnyGathererInstance = GathererInstanceExpander<Gatherer.DependencyKey>
 
   namespace Simulation {
-    type GraphNode = Lantern.Simulation.GraphNode<Artifacts.NetworkRequest>;
-    type GraphNetworkNode = Lantern.Simulation.GraphNetworkNode<Artifacts.NetworkRequest>;
-    type GraphCPUNode = Lantern.Simulation.GraphCPUNode;
+    type GraphNode = Lantern.Graph.Node<Artifacts.NetworkRequest>;
+    type GraphNetworkNode = Lantern.Graph.NetworkNode<Artifacts.NetworkRequest>;
+    type GraphCPUNode = Lantern.Graph.CPUNode<Artifacts.NetworkRequest>;
     type Simulator = Lantern.Simulation.Simulator<Artifacts.NetworkRequest>;
-    type NodeTiming = Lantern.Simulation.NodeTiming;
-    type MetricCoefficients = Lantern.Simulation.MetricCoefficients;
+    type NodeTiming = Lantern.Types.Simulation.NodeTiming;
     type Result = Lantern.Simulation.Result<Artifacts.NetworkRequest>;
   }
 }

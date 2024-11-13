@@ -4,23 +4,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import * as Lantern from '../../lib/lantern/lantern.js';
 import {makeComputedArtifact} from '../computed-artifact.js';
-import {LargestContentfulPaint} from '../../lib/lantern/metrics/largest-contentful-paint.js';
 import {getComputationDataParams, lanternErrorAdapter} from './lantern-metric.js';
 import {LanternFirstContentfulPaint} from './lantern-first-contentful-paint.js';
 
-/** @typedef {import('../../lib/lantern/metric.js').Extras} Extras */
-
-class LanternLargestContentfulPaint extends LargestContentfulPaint {
+class LanternLargestContentfulPaint extends Lantern.Metrics.LargestContentfulPaint {
   /**
    * @param {LH.Artifacts.MetricComputationDataInput} data
    * @param {LH.Artifacts.ComputedContext} context
-   * @param {Omit<Extras, 'optimistic'>=} extras
+   * @param {Omit<Lantern.Metrics.Extras, 'optimistic'>=} extras
    * @return {Promise<LH.Artifacts.LanternMetric>}
    */
   static async computeMetricWithGraphs(data, context, extras) {
-    return this.compute(await getComputationDataParams(data, context), extras)
-      .catch(lanternErrorAdapter);
+    const params = await getComputationDataParams(data, context);
+    return Promise.resolve(this.compute(params, extras)).catch(lanternErrorAdapter);
   }
 
   /**
