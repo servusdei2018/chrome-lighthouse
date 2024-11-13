@@ -67,7 +67,7 @@ function writeFile(filePath, output, outputMode) {
         if (err) {
           return reject(err);
         }
-        log.log('Printer', `${LH.OutputMode[outputMode]} output written to ${filePath}`);
+        log.log('Printer', `${OutputMode[outputMode]} output written to ${filePath}`);
         resolve();
       });
     });
