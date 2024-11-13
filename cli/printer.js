@@ -59,7 +59,7 @@ function writeToStdout(output) {
  */
 function writeFile(filePath, output, outputMode) {
   return new Promise((resolve, reject) => {
-    fs.mkdir(path.dirname(filePath), { recursive: true }, (err) => {
+    fs.mkdir(path.dirname(filePath), {recursive: true}, (err) => {
       if (err && err.code !== 'EEXIST') {
         return reject(err);
       }
