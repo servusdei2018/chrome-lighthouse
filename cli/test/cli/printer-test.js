@@ -35,11 +35,9 @@ describe('Printer', () => {
   });
 
   it('throws for invalid paths', () => {
-    const path = '!/#@.json';
+    const path = '//#@.json';
     const report = JSON.stringify(sampleResults);
-    return Printer.write(report, 'html', path).catch(err => {
-      assert.ok(err.code === 'ENOENT');
-    });
+    return assert.rejects(Printer.write(report, 'html', path));
   });
 
   it('returns output modes', () => {
